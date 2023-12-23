@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <IncludePath>3rdparty\glew-2.1.0\include;3rdparty\opengl\include;3rdparty\glm\include;3rdparty\freetype\include;3rdparty\glfw\include;$(IncludePath)</IncludePath>
+    <LibraryPath>3rdparty\glew-2.1.0\lib\Release\x64;3rdparty\opengl\lib;3rdparty\glfw\lib;3rdparty\freetype\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;glew32s.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ClCompile>
+      <PreprocessorDefinitions>USE_GLFW;USE_GLEW;USE_GLM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
