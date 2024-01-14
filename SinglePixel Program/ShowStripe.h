@@ -8,8 +8,8 @@
 class ShowImage
 {
 public:
-	int wide = 400;//屏宽
-	int height = 300;//屏高
+	int wide = 300;//屏宽
+	int height = 200;//屏高
 
 
 	ShowImage();
@@ -28,6 +28,7 @@ public:
 private:
 	GLFWwindow* window = NULL;
 	int Monitor;//获取监视器数量
+	GLFWmonitor** getMonitors;
 
 
 //-----Obj的初始化
@@ -55,7 +56,6 @@ private:
 
 	unsigned int vertex;
 	unsigned int fragment;
-	GLFWmonitor** getMonitors;
 
 	void Checkererrors(unsigned int ID, std::string type);
 //------绘制初始化

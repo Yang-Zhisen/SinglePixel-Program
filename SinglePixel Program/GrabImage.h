@@ -11,7 +11,7 @@ public:
 	void ShowImage();
 	void CloseCam();
 	bool KeyPress();
-	void   GrabPic();
+	void   GrabPic(int pageNum);
 	void CamDisplay();
 
 	
@@ -33,8 +33,8 @@ private:
 
 
 	MV_CC_DEVICE_INFO* DevInfo[10];
-	MV_CC_DEVICE_INFO* Dev_Open;
-	MV_CC_DEVICE_INFO_LIST m_stDevList;             // ch:设备信息列表结构体变量，用来存储设备列表
+	MV_CC_DEVICE_INFO* Dev_Open;					//用于接收确定的设备数据
+	MV_CC_DEVICE_INFO_LIST m_stDevList;             // 设备信息列表结构体变量，用来存储设备列表
 	int CamNum;
 	void CamInit();
 

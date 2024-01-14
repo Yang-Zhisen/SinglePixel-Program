@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClCompile Include="Camaratest.cpp" />
     <ClCompile Include="GrabImage.cpp" />
+    <ClCompile Include="opengltest.cpp" />
     <ClCompile Include="ShowStripe.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -55,7 +55,7 @@ void MVImage::OpenCam()
     nRet = MV_CC_SetEnumValue(handle, "TriggerMode", 1);
     if (MV_OK != nRet)
     {
-        printf("触发模式设置失败");
+        std::cout<<"触发模式设置失败"<<std::endl;
         return;
     }
 	nRet = MV_CC_SetEnumValueByString(handle, "TriggerSource", "Software");
@@ -117,12 +117,10 @@ void MVImage::ShowImage()
 }
 
 
-void MVImage::GrabPic()
+void MVImage::GrabPic(int pageNum)
 {
     MV_CC_StopGrabbing(handle);
     MV_CC_StartGrabbing(handle);
-    if (KeyPress())
-      {
 		nRet = MV_CC_SetCommandValue(handle, "TriggerSoftware");
 		if (MV_OK != nRet)
 		{
@@ -133,7 +131,7 @@ void MVImage::GrabPic()
             {
                 cv::Mat frame(frameInfo.stFrameInfo.nHeight, frameInfo.stFrameInfo.nWidth, CV_8U, frameInfo.pBufAddr);
                 // 保存图像到文件夹
-                std::string filename = "image_" + std::to_string(frameInfo.stFrameInfo.nFrameNum) + ".jpg";
+                std::string filename = "image_" + std::to_string(pageNum) + ".jpg";
                 std::string filepath = "D:\\SinglePixel\\SinglePixel Program\\imageSet\\" + filename;
                 cv::imwrite(filepath, frame);
                 std::cout << "保存成功 " << filepath << std::endl;
@@ -143,7 +141,6 @@ void MVImage::GrabPic()
                 std::cout << "取图寄了";
             }
         }
-}
 
 
 
