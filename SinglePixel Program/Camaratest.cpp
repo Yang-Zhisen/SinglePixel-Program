@@ -10,7 +10,7 @@
 std::condition_variable g_cv;
 std::mutex g_mutex;
 
-bool SigImg = true;
+bool SigImg = false;
 bool SigGrab = true;
 bool Stop = false;
 
@@ -23,15 +23,20 @@ void GrabImageFunc(MVImage GetImage)
 {
 	while (true)
 	{
+		if (Stop)
+		break;
+		else
+		{
+			if (SigGrab)
+			{
 		std::unique_lock<std::mutex> lock(g_mutex);
 		g_cv.wait(lock, [] { return SigGrab; });
 		GetImage.GrabPic(page);
 		SigImg = true;
 		SigGrab = false;
 		g_cv.notify_one();
-		
-		if (Stop)
-		break;
+			}
+		}
 	}
 }
 
@@ -55,7 +60,10 @@ int main()
 			for (int j = 0; j < int(scripe.wide / 2) + 1; j++)
 			{
 				if (scripe.Input())
+				{
+					Stop = true;
 					break;
+				}
 				std::unique_lock<std::mutex>lock(g_mutex);
 				float fx[3] = { i * Pi_2 / scripe.wide,j * Pi_2 / scripe.height,k * Pi / 2 };
 				scripe.DrawStride(fx);
@@ -68,6 +76,10 @@ int main()
 			}
 		}
 	}
+
+	std::unique_lock<std::mutex> lock(g_mutex);
 	Stop = true;
+	g_cv.notify_one();
 	t_Grab.join();
+	std::cout << page << std::endl;
 }

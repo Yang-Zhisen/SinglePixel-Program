@@ -8,8 +8,8 @@
 class ShowImage
 {
 public:
-	int wide = 300;//фа©М
-	int height = 200;//фа╦ъ
+	int wide = 100;//фа©М
+	int height = 100;//фа╦ъ
 
 
 	ShowImage();
